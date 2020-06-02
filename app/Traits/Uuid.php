@@ -6,7 +6,7 @@ trait Uuid {
     public static function bootUuid()
     {
         static::creating(function ($model) {
-            $model->id = \Ramsey\Uuid\Uuid::uuid4();
+            $model->uuid = \Ramsey\Uuid\Uuid::uuid4();
         });
     }
 }

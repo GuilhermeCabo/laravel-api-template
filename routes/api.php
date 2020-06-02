@@ -14,6 +14,21 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::middleware('auth:api')->get('/user', function (Request $request) {
-    return $request->user();
+
+Route::namespace('Users')->group(function () {
+
+    Route::apiResource("sessions", "SessionsController")->only([
+        "store"
+    ]);
+
+    Route::apiResource("users", "UsersController")->except([
+        "update", "delete"
+    ]);
+
+    Route::middleware("auth:sanctum")->group(function () {
+        Route::apiResource("users", "UsersController")->only([
+            "update", "delete"
+        ]);
+    });
 });
+
